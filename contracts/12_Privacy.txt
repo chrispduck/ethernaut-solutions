@@ -1,0 +1,10 @@
+Storage is 32 bytes
+(0) bool
+(1) uint256
+(2) uint8, uint8, uint16
+(3) bytes32[0]
+(4) bytes32[1]
+(5) bytes32[2]
+
+Take Most Significant 16 bits of slot 5
+
