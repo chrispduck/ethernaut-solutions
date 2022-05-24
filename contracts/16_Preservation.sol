@@ -26,7 +26,7 @@ contract Preservation {
         );
     }
 
-    // set the time for timezone 2
+    // set the time for timezone 2 - CALLING THIS WILL OVERWRITE SLOT 0 (TimeZone1Library) with address(_timeStamp)
     function setSecondTime(uint256 _timeStamp) public {
         timeZone2Library.delegatecall(
             abi.encodePacked(setTimeSignature, _timeStamp)
