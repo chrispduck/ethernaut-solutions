@@ -12,7 +12,7 @@
 // AIM is to replace storage slot 1 with our address:
 // 0x000000000000000000000000935902bC8136E3477Bfc420f68CA98297196c1C1
 
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 interface ICodex {
     function make_contact() external;

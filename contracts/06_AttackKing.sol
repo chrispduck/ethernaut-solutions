@@ -11,13 +11,13 @@ contract AttackKing{
     }
 
     function setup() public payable {
-        (bool success, bytes memory _) =  king.call{value: msg.value}("");
+        (bool success, bytes memory _) =  king.call.value(msg.value)("");
         require(success == true, "failed to transfer");
     }
 
     receive() payable external {
         if (setupDone){
-            (bool success, bytes memory _) =  king.call{value: msg.value}("");
+            (bool success, bytes memory _) =  king.call.value(msg.value)("");
         } else {
             setupDone = true;
         }

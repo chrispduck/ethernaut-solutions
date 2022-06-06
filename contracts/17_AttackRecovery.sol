@@ -7,7 +7,7 @@ interface ISimpleToken {
 }
 
 interface IRecovery {
-    function generateToken(string memory _name, uint256 _initialSupply)
+    function generateToken(string calldata _name, uint256 _initialSupply)
         external;
 }
 

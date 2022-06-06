@@ -17,3 +17,4 @@ contract AttackGateKeeperTwo {
         gateKey = x^mask;
         gateKeeperTwo.enter(bytes8(gateKey));
     }
+}
