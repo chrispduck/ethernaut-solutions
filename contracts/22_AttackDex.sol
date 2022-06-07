@@ -21,6 +21,7 @@ contract AttackDEX {
     }
 
     // must first approve this contract to spend tokens
+    // TODO not sure about convergence statement.
     function attack() public {
         address levelAddress = address(level);
         address from;
